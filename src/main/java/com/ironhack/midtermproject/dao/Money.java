@@ -1,14 +1,17 @@
 package com.ironhack.midtermproject.dao;
-
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import java.math.RoundingMode;
 import java.math.BigDecimal;
 import java.util.Currency;
 
+@Embeddable
 public class Money {
 
     private static final Currency USD = Currency.getInstance("USD");
     private static final RoundingMode DEFAULT_ROUNDING = RoundingMode.HALF_EVEN;
 
+    @Column(insertable = false, updatable = false)
     private final Currency currency;
     private BigDecimal amount;
 

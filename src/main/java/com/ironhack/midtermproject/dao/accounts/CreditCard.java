@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
@@ -16,6 +16,10 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class CreditCard extends Account {
 
+    @Embedded
+    @AttributeOverrides( {
+            @AttributeOverride(name="amount", column = @Column(name="credit_limit"))
+    })
     private Money creditLimit;
     private BigDecimal interestRate;
 }

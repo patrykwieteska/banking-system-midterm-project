@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import java.util.Date;
 
 @Entity
@@ -18,5 +20,6 @@ public class StudentChecking extends Account{
 
     private String secretKey;
     private Date creationDate;
+    @Enumerated(EnumType.STRING)
     private Status status;
 }

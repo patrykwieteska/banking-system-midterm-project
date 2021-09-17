@@ -12,7 +12,7 @@ import javax.persistence.Entity;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ThirdPart extends AccountOwner{
+public class ThirdPart extends Owner {
 
     private String secretKey;
 }

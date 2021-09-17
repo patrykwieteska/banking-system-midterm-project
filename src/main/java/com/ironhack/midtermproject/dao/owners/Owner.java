@@ -5,17 +5,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public abstract class AccountOwner {
+@Inheritance(strategy=InheritanceType.JOINED)
+public abstract class Owner {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

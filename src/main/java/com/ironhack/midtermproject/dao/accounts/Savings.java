@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -19,8 +19,14 @@ import java.util.Date;
 public class Savings extends Account{
 
     private String secretKey;
+    @Embedded
+    @AttributeOverrides( {
+            @AttributeOverride(name="amount", column = @Column(name="minimum_balance"))
+    })
     private Money minimumBalance;
     private Date creationDate;
+
+    @Enumerated(EnumType.STRING)
     private Status status;
     private BigDecimal interestRate;
 }
