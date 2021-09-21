@@ -1,13 +1,17 @@
 package com.ironhack.midtermproject.dao.accounts;
 
 import com.ironhack.midtermproject.dao.Money;
+import com.ironhack.midtermproject.dao.owners.AccountHolder;
 import com.ironhack.midtermproject.enums.Status;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -19,20 +23,28 @@ public class Checking extends Account {
 
     private String secretKey;
 
-    @Embedded
-    @AttributeOverrides( {
-            @AttributeOverride(name="amount", column = @Column(name="minimum_balance"))
-    })
-    private Money minimumBalance;
+    private BigDecimal minimumBalance;
+    private BigDecimal monthlyMaintenanceFee;
 
-    @Embedded
-    @AttributeOverrides( {
-            @AttributeOverride(name="amount", column = @Column(name="monthly_maintenance_fee"))
-    })
-    private Money monthlyMaintenanceFee;
-
-
-    private Date creationDate;
     @Enumerated(EnumType.STRING)
     private Status status;
+
+    public Checking(Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner, String secretKey, LocalDate creationDate, Status status) {
+        super(balance, primaryOwner, secondaryOwner,creationDate);
+        this.secretKey = secretKey;
+        this.setMinimumBalance();
+        this.setMonthlyMaintenanceFee();
+        this.status = status;
+    }
+
+
+    // setter for minimum balance (Constant value according to requirements)
+    public void setMinimumBalance() {
+        this.minimumBalance = new BigDecimal("250.00");
+    }
+
+    // setter for minimum balance (Constant value according to requirements)
+    public void setMonthlyMaintenanceFee() {
+        this.monthlyMaintenanceFee = new BigDecimal("12.00");
+    }
 }
