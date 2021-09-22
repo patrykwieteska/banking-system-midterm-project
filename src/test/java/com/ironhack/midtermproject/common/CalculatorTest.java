@@ -3,9 +3,8 @@ package com.ironhack.midtermproject.common;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
+import java.util.Locale;
 
-import static java.time.temporal.ChronoUnit.DAYS;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CalculatorTest {
@@ -22,9 +21,16 @@ class CalculatorTest {
         assertFalse(Calculator.isYearGetPassed(LocalDate.of(2021, 12, 12)));
     }
 
-
-    //TODO tests for method isMonthGetPassed
     @Test
-    void Calculator_isMonthGetPassed() {
+    void Calculator_isMonthGetPassed_passed() {
+        assertTrue(Calculator.isMonthGetPassed(LocalDate.now().minusDays(32)));
     }
+
+    @Test
+    void Calculator_isMonthGetPassed_notPassed() {
+        assertFalse(Calculator.isMonthGetPassed(LocalDate.now().minusDays(27)));
+    }
+
+
+    // TODO More complex tests for LocalDate.now();
 }

@@ -91,7 +91,8 @@ class SavingsTest {
 
     @Test
     void Savings_getBalance_creationDateGreaterThanAYear() {
-        Savings savings = new Savings(money,owner,null,"test", LocalDate.of(2019,10,1),Status.ACTIVE,null);
+        Savings savings = new Savings(money,owner,null,"test", LocalDate.now().minusYears(1).minusDays(1),Status.ACTIVE,
+                null);
         assertEquals(new BigDecimal("90225.00"),savings.getBalance().getAmount());
         assertEquals(savings.getInterestUpdateDate(),LocalDate.now());
 
@@ -102,7 +103,7 @@ class SavingsTest {
 
     @Test
     void Savings_getBalance_creationDateLessThanAYear() {
-        LocalDate date = LocalDate.of(LocalDate.now().getYear(),6,6);
+        LocalDate date = LocalDate.now().minusYears(1);
         Savings savings = new Savings(money,owner,null,"test", date,Status.ACTIVE,null);
 
         assertEquals(new BigDecimal("90000.00"),savings.getBalance().getAmount());
@@ -112,7 +113,7 @@ class SavingsTest {
     @Test
     void Savings_getBalance_interestUpdateDateGreaterThanAYear() {
         Savings savings = new Savings(money,owner,null,"test", LocalDate.of(2019,10,1),Status.ACTIVE,
-                LocalDate.of(2020,1,1));
+                LocalDate.now().minusYears(2).minusDays(1));
         assertEquals(new BigDecimal("90225.00"),savings.getBalance().getAmount());
         assertEquals(savings.getInterestUpdateDate(),LocalDate.now());
     }

@@ -85,7 +85,7 @@ class CreditCardTest {
 
     @Test
     void CreditCard_getBalance_monthAfterCreationDate() {
-        LocalDate date = LocalDate.of(LocalDate.now().getYear() - 1, 6, 6);
+        LocalDate date = LocalDate.now().minusDays(32);
         CreditCard creditCard = new CreditCard(money, owner, null, new BigDecimal("0.12"), date);
 
         assertEquals(new BigDecimal("112.00"), creditCard.getBalance().getAmount());
