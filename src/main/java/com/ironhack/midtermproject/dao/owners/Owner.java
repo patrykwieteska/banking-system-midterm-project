@@ -10,9 +10,10 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
-@Inheritance(strategy=InheritanceType.JOINED)
+@NoArgsConstructor
+@Inheritance(strategy= InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="owner_type", discriminatorType = DiscriminatorType.STRING)
 public abstract class Owner {
 
     @Id

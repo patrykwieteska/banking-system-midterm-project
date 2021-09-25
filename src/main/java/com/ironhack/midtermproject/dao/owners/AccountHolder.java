@@ -6,9 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.Date;
 
 @Entity
@@ -18,11 +18,15 @@ import java.util.Date;
 @AllArgsConstructor
 public class AccountHolder extends Owner {
 
-    private Date dateOfBirth;
+    private LocalDate dateOfBirth;
     @ManyToOne
     @JoinColumn(name = "primary_address_id")
     private Address primaryAddress;
     @ManyToOne
     @JoinColumn(name = "mailing_address_id")
     private Address mailingAddress;
+
+    public int getAge() {
+        return Period.between(this.getDateOfBirth(),LocalDate.now()).getYears();
+    }
 }
