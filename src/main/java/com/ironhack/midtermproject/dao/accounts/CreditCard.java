@@ -12,6 +12,9 @@ import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Digits;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
@@ -23,7 +26,13 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class CreditCard extends Account {
 
+    @Digits(integer = 6,fraction = 2)
+    @DecimalMax(value = "100000.0", message = "Credit limit cannot be greater tha 100,000.00")
     private BigDecimal creditLimit;
+
+    @DecimalMin(value = "0.0", message = "Interest rate cannot be less than 0.00")
+    @DecimalMax(value = "0.2", message = "Interest rate cannot be greater than 0.20")
+    @Digits(integer = 1,fraction = 2)
     private BigDecimal interestRate;
 
     @DateTimeFormat(pattern = "yyyy-mm-dd")

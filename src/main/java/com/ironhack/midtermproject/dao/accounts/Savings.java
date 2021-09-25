@@ -13,6 +13,7 @@ import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMin;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
@@ -26,6 +27,8 @@ import java.util.Date;
 public class Savings extends Account{
 
     private String secretKey;
+
+    @DecimalMin(value = "0.0",message = "Minimum balance cannot be less than 0")
     private BigDecimal minimumBalance;
 
     @DateTimeFormat(pattern = "yyyy-mm-dd")

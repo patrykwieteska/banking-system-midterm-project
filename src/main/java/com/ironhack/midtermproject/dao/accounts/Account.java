@@ -10,6 +10,8 @@ import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.lang.Nullable;
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Digits;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -45,6 +47,9 @@ public abstract class Account {
     private AccountHolder secondaryOwner;
 
     @NotNull
+    @DecimalMax(value = "999.99", message = "Penalty fee should be less than 1,000.00")
+    @DecimalMin(value = "0.0", message = "Penalty fee should be greater than 0.00")
+    @Digits(integer=3, fraction = 2, message = "Incorrect penalty fee")
     private BigDecimal penaltyFee;
 
     @DateTimeFormat(pattern = "yyyy-mm-dd")

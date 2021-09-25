@@ -10,6 +10,7 @@ import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.Digits;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Date;
@@ -23,7 +24,10 @@ public class Checking extends Account {
 
     private String secretKey;
 
+    @Digits(integer = 3,fraction = 2)
     private BigDecimal minimumBalance;
+
+    @Digits(integer = 3,fraction = 2)
     private BigDecimal monthlyMaintenanceFee;
 
     @Enumerated(EnumType.STRING)

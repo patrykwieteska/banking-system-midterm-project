@@ -30,7 +30,4 @@ class CalculatorTest {
     void Calculator_isMonthGetPassed_notPassed() {
         assertFalse(Calculator.isMonthGetPassed(LocalDate.now().minusDays(27)));
     }
-
-
-    // TODO More complex tests for LocalDate.now();
 }
