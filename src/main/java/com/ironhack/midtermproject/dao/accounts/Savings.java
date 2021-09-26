@@ -26,6 +26,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class Savings extends Account{
 
+    @JoinColumn(unique = true)
     private String secretKey;
 
     @DecimalMin(value = "0.0",message = "Minimum balance cannot be less than 0")
@@ -39,9 +40,9 @@ public class Savings extends Account{
     private BigDecimal interestRate;
 
     public Savings(Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner, String secretKey,
-                   BigDecimal minimumBalance, LocalDate creationDate, Status status, BigDecimal interestRate,
+                   BigDecimal minimumBalance, Status status, BigDecimal interestRate,
                    LocalDate interestUpdateDate) {
-        super(balance, primaryOwner, secondaryOwner, creationDate);
+        super(balance, primaryOwner, secondaryOwner);
         this.secretKey = secretKey;
         this.setMinimumBalance(minimumBalance);
         this.status = status;
@@ -50,8 +51,8 @@ public class Savings extends Account{
     }
 
     public Savings(Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner, String secretKey,
-                   BigDecimal minimumBalance, LocalDate creationDate, Status status, LocalDate interestUpdateDate) {
-        super(balance, primaryOwner, secondaryOwner,creationDate);
+                   BigDecimal minimumBalance, Status status, LocalDate interestUpdateDate) {
+        super(balance, primaryOwner, secondaryOwner);
         this.secretKey = secretKey;
         this.setMinimumBalance(minimumBalance);
         this.status = status;
@@ -61,8 +62,8 @@ public class Savings extends Account{
 
 
     public Savings(Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner,
-                   String secretKey, LocalDate creationDate, Status status, BigDecimal interestRate, LocalDate interestUpdateDate) {
-        super(balance, primaryOwner, secondaryOwner,creationDate);
+                   String secretKey, Status status, BigDecimal interestRate, LocalDate interestUpdateDate) {
+        super(balance, primaryOwner, secondaryOwner);
         this.secretKey = secretKey;
         this.minimumBalance = new BigDecimal("1000.00");
         this.status = status;
@@ -70,9 +71,8 @@ public class Savings extends Account{
         this.interestUpdateDate=interestUpdateDate;
     }
 
-    public Savings(Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner, String secretKey,
-                   LocalDate creationDate, Status status, LocalDate interestUpdateDate) {
-        super(balance, primaryOwner, secondaryOwner,creationDate);
+    public Savings(Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner, String secretKey, Status status, LocalDate interestUpdateDate) {
+        super(balance, primaryOwner, secondaryOwner);
         this.secretKey = secretKey;
         this.minimumBalance = new BigDecimal("1000.00");
         this.status = status;

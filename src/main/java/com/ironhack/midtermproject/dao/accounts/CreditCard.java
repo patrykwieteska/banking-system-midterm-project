@@ -40,26 +40,26 @@ public class CreditCard extends Account {
 
 
     public CreditCard(Money balance, BigDecimal creditLimit, AccountHolder primaryOwner, AccountHolder secondaryOwner
-            , BigDecimal interestRate,LocalDate creationDate) {
-        super(balance, primaryOwner, secondaryOwner,creationDate);
+            , BigDecimal interestRate) {
+        super(balance, primaryOwner, secondaryOwner);
         this.setCreditLimit(creditLimit);
         this.setInterestRate(interestRate);
     }
 
-    public CreditCard(Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner, BigDecimal interestRate,LocalDate creationDate) {
-        super(balance, primaryOwner, secondaryOwner,creationDate);
+    public CreditCard(Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner, BigDecimal interestRate) {
+        super(balance, primaryOwner, secondaryOwner);
         this.creditLimit = new BigDecimal("100.00");
         this.setInterestRate(interestRate);
     }
 
-    public CreditCard(Money balance, BigDecimal creditLimit, AccountHolder primaryOwner, AccountHolder secondaryOwner,LocalDate creationDate) {
-        super(balance, primaryOwner, secondaryOwner,creationDate);
+    public CreditCard(Money balance, BigDecimal creditLimit, AccountHolder primaryOwner, AccountHolder secondaryOwner) {
+        super(balance, primaryOwner, secondaryOwner);
         this.setCreditLimit(creditLimit);
         this.interestRate = new BigDecimal("0.20");
     }
 
-    public CreditCard(Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner,LocalDate creationDate) {
-        super(balance, primaryOwner, secondaryOwner,creationDate);
+    public CreditCard(Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner) {
+        super(balance, primaryOwner, secondaryOwner);
         this.creditLimit = new BigDecimal("100.00");
         this.interestRate = new BigDecimal("0.20");
     }

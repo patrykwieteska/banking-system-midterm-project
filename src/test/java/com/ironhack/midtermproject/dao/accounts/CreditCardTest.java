@@ -18,19 +18,17 @@ class CreditCardTest {
 
     private Money money;
     private AccountHolder owner;
-    private LocalDate creationDate;
 
 
     @BeforeEach
     void setUp() {
         money = new Money(new BigDecimal("100.00"));
         owner = new AccountHolder();
-        creationDate = LocalDate.now();
     }
 
     @Test
     void CreditCard_defaultValues() {
-        CreditCard creditCard = new CreditCard(money, owner, null, creationDate);
+        CreditCard creditCard = new CreditCard(money, owner, null);
 
         Assertions.assertEquals(creditCard.getCreditLimit(), new BigDecimal("100.00"));
         Assertions.assertEquals(creditCard.getInterestRate(), new BigDecimal("0.20"));
@@ -38,7 +36,7 @@ class CreditCardTest {
 
     @Test
     void CreditCard_setCreditLimit_customValues() {
-        CreditCard creditCard = new CreditCard(money, new BigDecimal("10000"), owner, null, new BigDecimal("0.100001"), creationDate);
+        CreditCard creditCard = new CreditCard(money, new BigDecimal("10000"), owner, null, new BigDecimal("0.100001"));
 
         Assertions.assertEquals(creditCard.getCreditLimit(), new BigDecimal("10000"));
         Assertions.assertEquals(creditCard.getInterestRate(), new BigDecimal("0.100001"));
@@ -46,38 +44,38 @@ class CreditCardTest {
 
     @Test
     void CreditCard_setCreditLimit_greaterThanDefault() {
-        CreditCard creditCard = new CreditCard(money, new BigDecimal("10000"), owner, null, new BigDecimal("0.100001"), creationDate);
+        CreditCard creditCard = new CreditCard(money, new BigDecimal("10000"), owner, null, new BigDecimal("0.100001"));
 
         Assertions.assertThrows(IncorrectCreditLimitValueException.class, () -> creditCard.setCreditLimit(new BigDecimal("100001")));
         Assertions.assertThrows(IncorrectCreditLimitValueException.class, () -> {
-            new CreditCard(money, new BigDecimal("100001"), owner, null, creationDate);
+            new CreditCard(money, new BigDecimal("100001"), owner, null);
         });
     }
 
     @Test
     void CreditCard_setCreditLimit_lessThanZero() {
-        CreditCard creditCard = new CreditCard(money, new BigDecimal("10000"), owner, null, new BigDecimal("0.100001"), creationDate);
+        CreditCard creditCard = new CreditCard(money, new BigDecimal("10000"), owner, null, new BigDecimal("0.100001"));
 
         Assertions.assertThrows(IncorrectCreditLimitValueException.class,
                 () -> creditCard.setCreditLimit(new BigDecimal("-0.0000001")));
         Assertions.assertThrows(IncorrectCreditLimitValueException.class, () -> {
-            new CreditCard(money, new BigDecimal("-0.0000001"), owner, null, creationDate);
+            new CreditCard(money, new BigDecimal("-0.0000001"), owner, null);
         });
     }
 
     @Test
     void CreditCard_setInterestRate_lessDefault() {
-        CreditCard creditCard = new CreditCard(money, owner, null, new BigDecimal("0.12"), creationDate);
+        CreditCard creditCard = new CreditCard(money, owner, null, new BigDecimal("0.12"));
 
         Assertions.assertThrows(IncorrectInterestRateValueException.class, () -> creditCard.setInterestRate(new BigDecimal("0.0999999")));
         Assertions.assertThrows(IncorrectInterestRateValueException.class, () -> {
-            new CreditCard(money, owner, null, new BigDecimal("0.099999"), creationDate);
+            new CreditCard(money, owner, null, new BigDecimal("0.099999"));
         });
     }
 
     @Test
     void CreditCard_getBalance_creationDateMonthIsNotPassed() {
-        CreditCard creditCard = new CreditCard(money, owner, null, new BigDecimal("0.12"), creationDate);
+        CreditCard creditCard = new CreditCard(money, owner, null, new BigDecimal("0.12"));
 
         assertEquals(new BigDecimal("100.00"), creditCard.getBalance().getAmount());
         assertNull(creditCard.getInterestUpdateDate());
@@ -86,7 +84,9 @@ class CreditCardTest {
     @Test
     void CreditCard_getBalance_monthAfterCreationDate() {
         LocalDate date = LocalDate.now().minusDays(32);
-        CreditCard creditCard = new CreditCard(money, owner, null, new BigDecimal("0.12"), date);
+        CreditCard creditCard = new CreditCard(money, owner, null, new BigDecimal("0.12"));
+
+        creditCard.setCreationDate(date);
 
         assertEquals(new BigDecimal("112.00"), creditCard.getBalance().getAmount());
         assertEquals(LocalDate.now(), creditCard.getInterestUpdateDate());

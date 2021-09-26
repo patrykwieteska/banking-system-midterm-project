@@ -12,6 +12,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.JoinColumn;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Date;
@@ -23,14 +24,14 @@ import java.util.Date;
 @AllArgsConstructor
 public class StudentChecking extends Account{
 
+    @JoinColumn(unique = true)
     private String secretKey;
     @Enumerated(EnumType.STRING)
     private Status status;
 
 
-    public StudentChecking(Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner, String secretKey,
-     LocalDate creationDate) {
-        super(balance, primaryOwner, secondaryOwner,creationDate);
+    public StudentChecking(Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner, String secretKey) {
+        super(balance, primaryOwner, secondaryOwner);
         this.secretKey = secretKey;
     }
 }
