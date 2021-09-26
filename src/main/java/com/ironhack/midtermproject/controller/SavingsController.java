@@ -1,4 +1,4 @@
 package com.ironhack.midtermproject.controller;
 
-public class OwnerRepository {
+public class SavingsController {
 }

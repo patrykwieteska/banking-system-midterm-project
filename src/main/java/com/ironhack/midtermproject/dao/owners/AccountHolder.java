@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -18,9 +19,11 @@ import java.util.Date;
 @AllArgsConstructor
 public class AccountHolder extends Owner {
 
+    @DateTimeFormat(pattern = "yyyy-mm-dd")
+    @JoinColumn(nullable=false)
     private LocalDate dateOfBirth;
     @ManyToOne
-    @JoinColumn(name = "primary_address_id",nullable = false)
+    @JoinColumn(name = "primary_address_id")
     private Address primaryAddress;
 
     @ManyToOne

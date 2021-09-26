@@ -11,7 +11,6 @@ public class Money {
     private static final Currency USD = Currency.getInstance("USD");
     private static final RoundingMode DEFAULT_ROUNDING = RoundingMode.HALF_EVEN;
 
-    @Column(insertable = false, updatable = false)
     private final Currency currency;
     private BigDecimal amount;
 

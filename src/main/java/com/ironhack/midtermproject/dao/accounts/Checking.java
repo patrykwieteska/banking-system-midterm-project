@@ -42,6 +42,14 @@ public class Checking extends Account {
         this.status = status;
     }
 
+    public Checking(Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner, String secretKey) {
+        super(balance, primaryOwner, secondaryOwner);
+        this.secretKey = secretKey;
+        this.setMinimumBalance();
+        this.setMonthlyMaintenanceFee();
+        this.status = Status.ACTIVE;
+    }
+
 
     // setter for minimum balance (Constant value according to requirements)
     public void setMinimumBalance() {

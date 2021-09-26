@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Inheritance(strategy=InheritanceType.JOINED)
-@DiscriminatorColumn(name="_type", discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorColumn(name="transfer_type", discriminatorType = DiscriminatorType.STRING)
 public abstract class Transfer {
 
     @Id
