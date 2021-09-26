@@ -15,4 +15,7 @@ import javax.persistence.Id;
 @NoArgsConstructor
 public class Admin extends Owner {
 
+    public Admin(String name) {
+        super(name);
+    }
 }

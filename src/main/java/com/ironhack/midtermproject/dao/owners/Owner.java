@@ -20,4 +20,9 @@ public abstract class Owner {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     String name;
+
+
+    public Owner(String name) {
+        this.name = name;
+    }
 }

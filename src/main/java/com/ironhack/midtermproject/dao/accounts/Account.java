@@ -55,13 +55,12 @@ public abstract class Account {
     @DateTimeFormat(pattern = "yyyy-mm-dd")
     private LocalDate creationDate;
 
-    public Account(Money balance, @NotNull AccountHolder primaryOwner, @Nullable AccountHolder secondaryOwner,
-                   LocalDate creationDate) {
+    public Account(Money balance, @NotNull AccountHolder primaryOwner, @Nullable AccountHolder secondaryOwner) {
         this.balance = balance;
         this.primaryOwner = primaryOwner;
         this.secondaryOwner = secondaryOwner;
         this.setPenaltyFee();
-        this.creationDate=creationDate;
+        this.creationDate=LocalDate.now();
     }
 
     private void setPenaltyFee() {
@@ -70,9 +69,5 @@ public abstract class Account {
 
     public Money getBalance() {
         return balance;
-    }
-
-    public void setBalance(BigDecimal amount) {
-
     }
 }

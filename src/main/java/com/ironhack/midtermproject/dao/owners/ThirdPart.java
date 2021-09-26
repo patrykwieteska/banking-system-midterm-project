@@ -6,9 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
 @Entity
 @Getter
@@ -17,5 +14,10 @@ import javax.persistence.Id;
 @AllArgsConstructor
 public class ThirdPart extends Owner {
 
-    private String secretKey;
+    private String hashedKey;
+
+    public ThirdPart(String name, String hashedKey) {
+        super(name);
+        this.hashedKey = hashedKey;
+    }
 }

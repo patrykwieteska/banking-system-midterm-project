@@ -20,13 +20,27 @@ public class AccountHolder extends Owner {
 
     private LocalDate dateOfBirth;
     @ManyToOne
-    @JoinColumn(name = "primary_address_id")
+    @JoinColumn(name = "primary_address_id",nullable = false)
     private Address primaryAddress;
+
     @ManyToOne
     @JoinColumn(name = "mailing_address_id")
     private Address mailingAddress;
 
     public int getAge() {
         return Period.between(this.getDateOfBirth(),LocalDate.now()).getYears();
+    }
+
+    public AccountHolder(String name, LocalDate dateOfBirth, Address primaryAddress, Address mailingAddress) {
+        super(name);
+        this.dateOfBirth = dateOfBirth;
+        this.primaryAddress = primaryAddress;
+        this.mailingAddress = mailingAddress;
+    }
+
+    public AccountHolder(String name, LocalDate dateOfBirth, Address primaryAddress) {
+        super(name);
+        this.dateOfBirth = dateOfBirth;
+        this.primaryAddress = primaryAddress;
     }
 }

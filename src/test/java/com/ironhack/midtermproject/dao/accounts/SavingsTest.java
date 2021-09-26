@@ -27,11 +27,11 @@ class SavingsTest {
 
     @Test
     void Savings_setInterestRate_valueGreaterThanDefault() {
-        Savings savings = new Savings(this.money,this.owner,null,"qwerfq234fasd",LocalDate.now(),
+        Savings savings = new Savings(this.money,this.owner,null,"qwerfq234fasd",
                 Status.ACTIVE,null);
         assertThrows(IncorrectInterestRateValueException.class, () -> savings.setInterestRate(new BigDecimal("1.00")));
         assertThrows(IncorrectInterestRateValueException.class, () -> {
-            new Savings(this.money,this.owner,null,"qwerfq234fasd",new BigDecimal("900"), LocalDate.now(),
+            new Savings(this.money,this.owner,null,"qwerfq234fasd",new BigDecimal("900"),
                     Status.ACTIVE,new BigDecimal("0.51"),null);
         });
 
@@ -39,12 +39,12 @@ class SavingsTest {
 
     @Test
     void Savings_setInterestRate_valueLessThanDefault() {
-        Savings savings = new Savings(this.money,this.owner,null,"qwerfq234fasd",LocalDate.now(),
+        Savings savings = new Savings(this.money,this.owner,null,"qwerfq234fasd",
                 Status.ACTIVE,null);
         assertThrows(IncorrectInterestRateValueException.class,
                 () -> savings.setInterestRate(new BigDecimal("-0.0000001")));
         assertThrows(IncorrectInterestRateValueException.class, () -> {
-            new Savings(this.money,this.owner,null,"qwerfq234fasd",new BigDecimal("900"), LocalDate.now(),
+            new Savings(this.money,this.owner,null,"qwerfq234fasd",new BigDecimal("900"),
                     Status.ACTIVE,new BigDecimal("-0.0000001"),null);
         });
 
@@ -52,7 +52,7 @@ class SavingsTest {
 
     @Test
     void Savings_defaultValues() {
-        Savings savings = new Savings(this.money,this.owner,null,"qwerfq234fasd",LocalDate.now(),
+        Savings savings = new Savings(this.money,this.owner,null,"qwerfq234fasd",
                 Status.ACTIVE,null);
 
         assertEquals(savings.getInterestRate(), new BigDecimal("0.0025"));
@@ -61,7 +61,7 @@ class SavingsTest {
 
     @Test
     void Savings_setInterestRate_customValue() {
-        Savings savings = new Savings(this.money,this.owner,null,"qwerfq234fasd",LocalDate.now(),
+        Savings savings = new Savings(this.money,this.owner,null,"qwerfq234fasd",
                 Status.ACTIVE,new BigDecimal("0.004"),null);
 
         assertEquals(savings.getInterestRate(),new BigDecimal("0.004"));
@@ -69,12 +69,12 @@ class SavingsTest {
 
     @Test
     void Savings_setMinimumBalance_lessThanDefault() {
-        Savings savings = new Savings(this.money,this.owner,null,"qwerfq234fasd",LocalDate.now(),
+        Savings savings = new Savings(this.money,this.owner,null,"qwerfq234fasd",
                 Status.ACTIVE,null);
 
         assertThrows(IncorrectMinimumBalanceValueException.class, () -> savings.setMinimumBalance(new BigDecimal("99")));
         assertThrows(IncorrectMinimumBalanceValueException.class, () -> {
-            new Savings(this.money,this.owner,null,"qwerfq234fasd",new BigDecimal("99"), LocalDate.now(),
+            new Savings(this.money,this.owner,null,"qwerfq234fasd",new BigDecimal("99"),
                     Status.ACTIVE,new BigDecimal("0.51"),null);
         });
 
@@ -83,7 +83,6 @@ class SavingsTest {
     @Test
     void Savings_setMinimumBalance_customValue() {
         Savings savings = new Savings(this.money,this.owner,null,"qwerfq234fasd",new BigDecimal("150"),
-                LocalDate.now(),
                 Status.ACTIVE,null);
 
         assertEquals(savings.getMinimumBalance(),new BigDecimal("150"));
@@ -91,8 +90,11 @@ class SavingsTest {
 
     @Test
     void Savings_getBalance_creationDateGreaterThanAYear() {
-        Savings savings = new Savings(money,owner,null,"test", LocalDate.now().minusYears(1).minusDays(1),Status.ACTIVE,
+        Savings savings = new Savings(money,owner,null,"test",Status.ACTIVE,
                 null);
+
+        savings.setCreationDate(LocalDate.now().minusYears(1).minusDays(1));
+
         assertEquals(new BigDecimal("90225.00"),savings.getBalance().getAmount());
         assertEquals(savings.getInterestUpdateDate(),LocalDate.now());
 
@@ -104,7 +106,9 @@ class SavingsTest {
     @Test
     void Savings_getBalance_creationDateLessThanAYear() {
         LocalDate date = LocalDate.now().minusYears(1);
-        Savings savings = new Savings(money,owner,null,"test", date,Status.ACTIVE,null);
+        Savings savings = new Savings(money,owner,null,"test",Status.ACTIVE,null);
+
+        savings.setCreationDate(date);
 
         assertEquals(new BigDecimal("90000.00"),savings.getBalance().getAmount());
         assertNull(savings.getInterestUpdateDate());
@@ -112,8 +116,10 @@ class SavingsTest {
 
     @Test
     void Savings_getBalance_interestUpdateDateGreaterThanAYear() {
-        Savings savings = new Savings(money,owner,null,"test", LocalDate.of(2019,10,1),Status.ACTIVE,
+        Savings savings = new Savings(money,owner,null,"test",Status.ACTIVE,
                 LocalDate.now().minusYears(2).minusDays(1));
+        savings.setCreationDate(LocalDate.of(2019,10,1));
+
         assertEquals(new BigDecimal("90225.00"),savings.getBalance().getAmount());
         assertEquals(savings.getInterestUpdateDate(),LocalDate.now());
     }

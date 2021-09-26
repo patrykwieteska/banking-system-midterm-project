@@ -22,6 +22,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class Checking extends Account {
 
+    @JoinColumn(unique = true)
     private String secretKey;
 
     @Digits(integer = 3,fraction = 2)
@@ -33,8 +34,8 @@ public class Checking extends Account {
     @Enumerated(EnumType.STRING)
     private Status status;
 
-    public Checking(Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner, String secretKey, LocalDate creationDate, Status status) {
-        super(balance, primaryOwner, secondaryOwner,creationDate);
+    public Checking(Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner, String secretKey, Status status) {
+        super(balance, primaryOwner, secondaryOwner);
         this.secretKey = secretKey;
         this.setMinimumBalance();
         this.setMonthlyMaintenanceFee();
