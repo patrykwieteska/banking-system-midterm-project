@@ -3,6 +3,7 @@ package com.ironhack.midtermproject.dao.accounts;
 import com.ironhack.midtermproject.common.Calculator;
 import com.ironhack.midtermproject.dao.Money;
 import com.ironhack.midtermproject.dao.owners.AccountHolder;
+import com.ironhack.midtermproject.enums.AccountType;
 import com.ironhack.midtermproject.exceptions.IncorrectCreditLimitValueException;
 import com.ironhack.midtermproject.exceptions.IncorrectInterestRateValueException;
 import lombok.AllArgsConstructor;
@@ -41,25 +42,25 @@ public class CreditCard extends Account {
 
     public CreditCard(Money balance, BigDecimal creditLimit, AccountHolder primaryOwner, AccountHolder secondaryOwner
             , BigDecimal interestRate) {
-        super(balance, primaryOwner, secondaryOwner);
+        super(balance, primaryOwner, secondaryOwner, AccountType.CREDIT_CARD,null);
         this.setCreditLimit(creditLimit);
         this.setInterestRate(interestRate);
     }
 
     public CreditCard(Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner, BigDecimal interestRate) {
-        super(balance, primaryOwner, secondaryOwner);
+        super(balance, primaryOwner, secondaryOwner, AccountType.CREDIT_CARD,null);
         this.creditLimit = new BigDecimal("100.00");
         this.setInterestRate(interestRate);
     }
 
     public CreditCard(Money balance, BigDecimal creditLimit, AccountHolder primaryOwner, AccountHolder secondaryOwner) {
-        super(balance, primaryOwner, secondaryOwner);
+        super(balance, primaryOwner, secondaryOwner, AccountType.CREDIT_CARD,null);
         this.setCreditLimit(creditLimit);
         this.interestRate = new BigDecimal("0.20");
     }
 
     public CreditCard(Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner) {
-        super(balance, primaryOwner, secondaryOwner);
+        super(balance, primaryOwner, secondaryOwner, AccountType.CREDIT_CARD,null);
         this.creditLimit = new BigDecimal("100.00");
         this.interestRate = new BigDecimal("0.20");
     }

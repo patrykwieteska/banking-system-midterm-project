@@ -19,7 +19,6 @@ public class OwnerController {
     @Autowired
     OwnerService ownerService;
 
-
     @PostMapping("/account-holder")
     @ResponseStatus(HttpStatus.CREATED)
     public void createAccountHolder(@RequestBody @Valid AccountHolder accountHolder) {
@@ -37,4 +36,8 @@ public class OwnerController {
     public void createAccountHolder(@RequestBody @Valid ThirdPart thirdPart) {
         ownerService.createThirdPart(thirdPart);
     }
+
+
+
+
 }

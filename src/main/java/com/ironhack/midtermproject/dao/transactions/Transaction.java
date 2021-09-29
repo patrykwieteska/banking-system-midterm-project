@@ -2,6 +2,8 @@ package com.ironhack.midtermproject.dao.transactions;
 
 import com.ironhack.midtermproject.dao.Money;
 import com.ironhack.midtermproject.dao.accounts.Account;
+import com.ironhack.midtermproject.dao.owners.Owner;
+import com.ironhack.midtermproject.enums.TransactionStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,11 +21,19 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Inheritance(strategy=InheritanceType.JOINED)
 @DiscriminatorColumn(name="transfer_type", discriminatorType = DiscriminatorType.STRING)
-public abstract class Transaction {
+public class Transaction {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "sender_id")
+    private Owner transferSender;
+
+    @ManyToOne
+    @JoinColumn(name = "receiver_id")
+    private Owner transferReceiver;
 
     @Embedded
     private Money amount;
@@ -36,17 +46,29 @@ public abstract class Transaction {
     @ManyToOne
     private Account receiverAccount;
 
-    public Transaction(Money amount, boolean isFraudDetected, Account receiverAccount) {
+    @Enumerated(EnumType.STRING)
+    private TransactionStatus status;
+
+    public Transaction(Money amount, boolean isFraudDetected, Account receiverAccount, Owner transferSender,
+                       Owner transferReceiver,TransactionStatus status) {
         this.amount = amount;
         this.transferDate = LocalDateTime.now();
         this.isFraudDetected = isFraudDetected;
         this.receiverAccount = receiverAccount;
+        this.transferSender=transferSender;
+        this.transferReceiver=transferReceiver;
+        this.status=status;
+
     }
 
-    public Transaction(Money amount, Account receiverAccount) {
+    public Transaction(Money amount, Account receiverAccount, Owner transferSender, Owner transferReceiver,
+                       TransactionStatus status) {
         this.amount = amount;
         this.transferDate = LocalDateTime.now();
         this.isFraudDetected=false;
         this.receiverAccount = receiverAccount;
+        this.transferSender=transferSender;
+        this.transferReceiver=transferReceiver;
+        this.status=status;
     }
 }

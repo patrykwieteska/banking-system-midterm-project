@@ -22,7 +22,7 @@ public class StudentCheckingController {
     @Autowired
     CheckingService checkingService;
 
-    @PostMapping("/")
+    @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
     public void createChecking(@RequestBody @Valid CheckingDto checkingDto) {
 
@@ -35,7 +35,7 @@ public class StudentCheckingController {
         return studentCheckingRepository.findById(id);
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     @ResponseStatus(HttpStatus.OK)
     public List<StudentChecking> getAllChecking() {
         return studentCheckingRepository.findAll();
