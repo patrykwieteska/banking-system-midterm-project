@@ -1,4 +1,4 @@
-package com.ironhack.midtermproject.dao.transactions;
+package com.ironhack.midtermproject.dto;
 
 
 import com.ironhack.midtermproject.enums.TransactionStatus;

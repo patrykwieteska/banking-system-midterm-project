@@ -1,4 +1,4 @@
-package com.ironhack.midtermproject.dao.transactions;
+package com.ironhack.midtermproject.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
