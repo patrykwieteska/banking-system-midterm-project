@@ -8,10 +8,7 @@ import com.ironhack.midtermproject.service.OwnerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -23,19 +20,19 @@ public class OwnerController {
     OwnerService ownerService;
 
 
-    @PostMapping("/new-account-holder")
+    @PostMapping("/account-holder")
     @ResponseStatus(HttpStatus.CREATED)
     public void createAccountHolder(@RequestBody @Valid AccountHolder accountHolder) {
         ownerService.createAccountHolder(accountHolder);
     }
 
-    @PostMapping("/new-admin")
+    @PostMapping("/admin")
     @ResponseStatus(HttpStatus.CREATED)
     public void createAccountHolder(@RequestBody @Valid Admin admin) {
         ownerService.createAdmin(admin);
     }
 
-    @PostMapping("/new-third-part")
+    @PostMapping("/third-part")
     @ResponseStatus(HttpStatus.CREATED)
     public void createAccountHolder(@RequestBody @Valid ThirdPart thirdPart) {
         ownerService.createThirdPart(thirdPart);

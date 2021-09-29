@@ -1,8 +1,7 @@
-package com.ironhack.midtermproject.dao.transfers;
+package com.ironhack.midtermproject.dao.transactions;
 
 import com.ironhack.midtermproject.dao.Money;
 import com.ironhack.midtermproject.dao.accounts.Account;
-import com.ironhack.midtermproject.dao.owners.Owner;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,7 +9,6 @@ import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 
@@ -21,7 +19,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Inheritance(strategy=InheritanceType.JOINED)
 @DiscriminatorColumn(name="transfer_type", discriminatorType = DiscriminatorType.STRING)
-public abstract class Transfer {
+public abstract class Transaction {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,14 +36,14 @@ public abstract class Transfer {
     @ManyToOne
     private Account receiverAccount;
 
-    public Transfer(Money amount, boolean isFraudDetected, Account receiverAccount) {
+    public Transaction(Money amount, boolean isFraudDetected, Account receiverAccount) {
         this.amount = amount;
         this.transferDate = LocalDateTime.now();
         this.isFraudDetected = isFraudDetected;
         this.receiverAccount = receiverAccount;
     }
 
-    public Transfer(Money amount, Account receiverAccount) {
+    public Transaction(Money amount, Account receiverAccount) {
         this.amount = amount;
         this.transferDate = LocalDateTime.now();
         this.isFraudDetected=false;

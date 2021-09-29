@@ -24,7 +24,7 @@ class CheckingTest {
         money = new Money(new BigDecimal("0"));
         owner = new AccountHolder();
 
-        checking = new Checking(money,owner,null,"dasda3dawcsdasd", Status.ACTIVE);
+        checking = new Checking(money,owner,null,"dasda3dawcsdasd");
 
     }
 

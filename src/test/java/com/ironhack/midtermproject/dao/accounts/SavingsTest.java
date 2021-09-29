@@ -32,7 +32,7 @@ class SavingsTest {
         assertThrows(IncorrectInterestRateValueException.class, () -> savings.setInterestRate(new BigDecimal("1.00")));
         assertThrows(IncorrectInterestRateValueException.class, () -> {
             new Savings(this.money,this.owner,null,"qwerfq234fasd",new BigDecimal("900"),
-                    Status.ACTIVE,new BigDecimal("0.51"),null);
+                    Status.ACTIVE,new BigDecimal("0.51"));
         });
 
     }
@@ -45,7 +45,7 @@ class SavingsTest {
                 () -> savings.setInterestRate(new BigDecimal("-0.0000001")));
         assertThrows(IncorrectInterestRateValueException.class, () -> {
             new Savings(this.money,this.owner,null,"qwerfq234fasd",new BigDecimal("900"),
-                    Status.ACTIVE,new BigDecimal("-0.0000001"),null);
+                    Status.ACTIVE,new BigDecimal("-0.0000001"));
         });
 
     }
@@ -62,7 +62,7 @@ class SavingsTest {
     @Test
     void Savings_setInterestRate_customValue() {
         Savings savings = new Savings(this.money,this.owner,null,"qwerfq234fasd",
-                Status.ACTIVE,new BigDecimal("0.004"),null);
+                Status.ACTIVE,new BigDecimal("0.004"));
 
         assertEquals(savings.getInterestRate(),new BigDecimal("0.004"));
     }
@@ -75,7 +75,7 @@ class SavingsTest {
         assertThrows(IncorrectMinimumBalanceValueException.class, () -> savings.setMinimumBalance(new BigDecimal("99")));
         assertThrows(IncorrectMinimumBalanceValueException.class, () -> {
             new Savings(this.money,this.owner,null,"qwerfq234fasd",new BigDecimal("99"),
-                    Status.ACTIVE,new BigDecimal("0.51"),null);
+                    Status.ACTIVE,new BigDecimal("0.51"));
         });
 
     }
@@ -116,8 +116,7 @@ class SavingsTest {
 
     @Test
     void Savings_getBalance_interestUpdateDateGreaterThanAYear() {
-        Savings savings = new Savings(money,owner,null,"test",Status.ACTIVE,
-                LocalDate.now().minusYears(2).minusDays(1));
+        Savings savings = new Savings(money,owner,null,"test",Status.ACTIVE);
         savings.setCreationDate(LocalDate.of(2019,10,1));
 
         assertEquals(new BigDecimal("90225.00"),savings.getBalance().getAmount());

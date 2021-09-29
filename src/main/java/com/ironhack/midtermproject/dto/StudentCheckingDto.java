@@ -13,8 +13,8 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 @AllArgsConstructor
-public class CheckingDto {
-    private final AccountType accountType = AccountType.CHECKING;
+public class StudentCheckingDto {
+    private final AccountType accountType = AccountType.STUDENT_CHECKING;
     @NotNull
     @Digits(integer = 10,fraction = 2, message = "Wrong decimal format")
     private BigDecimal balanceAmount;
@@ -24,5 +24,4 @@ public class CheckingDto {
     @NotNull
     private String secretKey;
     private Status status;
-
 }

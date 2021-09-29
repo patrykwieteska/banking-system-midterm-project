@@ -5,10 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Getter
@@ -32,5 +29,24 @@ public class Address {
         this.postalCode = postalCode;
         this.street = street;
         this.streetNumber = streetNumber;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if(o == this)
+            return true;
+
+        if(!(o instanceof Address)) {
+            return false;
+        }
+
+        Address address = (Address) o;
+
+        return address.getCountry().trim().compareTo(this.getCountry()) == 0 &&
+                address.getCity().trim().compareTo(this.getCity()) == 0 &&
+                address.getStreet().trim().compareTo(this.getStreet()) == 0 &&
+                address.getPostalCode().trim().compareTo(this.getPostalCode()) == 0 &&
+                address.getStreetNumber().trim().compareTo(this.getStreetNumber()) == 0;
     }
 }
