@@ -38,7 +38,7 @@ class AccountRepositoryTest {
         address = new Address("France", "Paris", "423423", "Street", "123");
         owner = new AccountHolder("The owner", LocalDate.of(1992, 2, 20), address);
         money = new Money(new BigDecimal("100000.00"));
-        account = new Checking(money, owner, null, "", Status.ACTIVE);
+        account = new Checking(money, owner, null, "");
 
         addressRepository.save(address);
         ownerRepository.save(owner);

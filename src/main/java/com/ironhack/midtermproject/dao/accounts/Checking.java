@@ -34,14 +34,6 @@ public class Checking extends Account {
     @Enumerated(EnumType.STRING)
     private Status status;
 
-    public Checking(Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner, String secretKey, Status status) {
-        super(balance, primaryOwner, secondaryOwner);
-        this.secretKey = secretKey;
-        this.setMinimumBalance();
-        this.setMonthlyMaintenanceFee();
-        this.status = status;
-    }
-
     public Checking(Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner, String secretKey) {
         super(balance, primaryOwner, secondaryOwner);
         this.secretKey = secretKey;

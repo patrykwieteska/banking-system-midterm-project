@@ -1,12 +1,11 @@
 package com.ironhack.midtermproject.controller;
 
-import com.ironhack.midtermproject.dao.accounts.Checking;
+import com.ironhack.midtermproject.dao.accounts.StudentChecking;
 import com.ironhack.midtermproject.dto.CheckingDto;
-import com.ironhack.midtermproject.repository.CheckingRepository;
+import com.ironhack.midtermproject.repository.StudentCheckingRepository;
 import com.ironhack.midtermproject.service.CheckingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -14,16 +13,16 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/accounts/checking")
-public class CheckingController {
+@RequestMapping("/accounts/student-checking")
+public class StudentCheckingController {
+
+    @Autowired
+    StudentCheckingRepository studentCheckingRepository;
 
     @Autowired
     CheckingService checkingService;
 
-    @Autowired
-    CheckingRepository checkingRepository;
-
-    @PostMapping("")
+    @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
     public void createChecking(@RequestBody @Valid CheckingDto checkingDto) {
 
@@ -32,14 +31,13 @@ public class CheckingController {
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Optional<Checking> getChecking(@PathVariable(name="id") Long id) {
-        return checkingRepository.findById(id);
+    public Optional<StudentChecking> getChecking(@PathVariable(name="id") Long id) {
+        return studentCheckingRepository.findById(id);
     }
 
-    @GetMapping("")
+    @GetMapping("/")
     @ResponseStatus(HttpStatus.OK)
-    public List<Checking> getAllChecking() {
-        return checkingRepository.findAll();
+    public List<StudentChecking> getAllChecking() {
+        return studentCheckingRepository.findAll();
     }
-
 }

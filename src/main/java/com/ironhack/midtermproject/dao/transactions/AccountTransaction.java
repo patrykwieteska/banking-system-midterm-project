@@ -1,4 +1,4 @@
-package com.ironhack.midtermproject.dao.transfers;
+package com.ironhack.midtermproject.dao.transactions;
 
 import com.ironhack.midtermproject.dao.Money;
 import com.ironhack.midtermproject.dao.accounts.Account;
@@ -15,7 +15,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Setter
 @Getter
-public class AccountTransfer extends Transfer {
+public class AccountTransaction extends Transaction {
 
     @ManyToOne
     @JoinColumn(name = "sender_id")
@@ -26,14 +26,14 @@ public class AccountTransfer extends Transfer {
     private Owner transferReceiver;
 
 
-    public AccountTransfer(Money amount, Owner transferSender, Owner transferReceiver, boolean isFraudDetected,
-                           Account receiverAccount) {
+    public AccountTransaction(Money amount, Owner transferSender, Owner transferReceiver, boolean isFraudDetected,
+                              Account receiverAccount) {
         super(amount,isFraudDetected,receiverAccount);
         this.transferSender = transferSender;
         this.transferReceiver = transferReceiver;
     }
 
-    public AccountTransfer(Money amount, Owner transferSender, Owner transferReceiver, Account receiverAccount) {
+    public AccountTransaction(Money amount, Owner transferSender, Owner transferReceiver, Account receiverAccount) {
         super(amount,receiverAccount);
         this.transferSender = transferSender;
         this.transferReceiver = transferReceiver;

@@ -1,5 +1,8 @@
 package com.ironhack.midtermproject.dao.accounts;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.ironhack.midtermproject.dao.Money;
 import com.ironhack.midtermproject.dao.owners.AccountHolder;
 import com.sun.istack.NotNull;
@@ -36,6 +39,7 @@ public abstract class Account {
     private Money balance;
 
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "primary_owner_id")
     @NotNull
@@ -54,6 +58,8 @@ public abstract class Account {
 
     @DateTimeFormat(pattern = "yyyy-mm-dd")
     private LocalDate creationDate;
+
+
 
     public Account(Money balance, @NotNull AccountHolder primaryOwner, @Nullable AccountHolder secondaryOwner) {
         this.balance = balance;

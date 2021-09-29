@@ -40,44 +40,39 @@ public class Savings extends Account{
     private BigDecimal interestRate;
 
     public Savings(Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner, String secretKey,
-                   BigDecimal minimumBalance, Status status, BigDecimal interestRate,
-                   LocalDate interestUpdateDate) {
+                   BigDecimal minimumBalance, Status status, BigDecimal interestRate) {
         super(balance, primaryOwner, secondaryOwner);
         this.secretKey = secretKey;
         this.setMinimumBalance(minimumBalance);
         this.status = status;
         this.setInterestRate(interestRate);
-        this.interestUpdateDate=interestUpdateDate;
     }
 
     public Savings(Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner, String secretKey,
-                   BigDecimal minimumBalance, Status status, LocalDate interestUpdateDate) {
+                   BigDecimal minimumBalance, Status status) {
         super(balance, primaryOwner, secondaryOwner);
         this.secretKey = secretKey;
         this.setMinimumBalance(minimumBalance);
         this.status = status;
         this.interestRate = new BigDecimal("0.0025");
-        this.interestUpdateDate=interestUpdateDate;
     }
 
 
     public Savings(Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner,
-                   String secretKey, Status status, BigDecimal interestRate, LocalDate interestUpdateDate) {
+                   String secretKey, Status status, BigDecimal interestRate) {
         super(balance, primaryOwner, secondaryOwner);
         this.secretKey = secretKey;
         this.minimumBalance = new BigDecimal("1000.00");
         this.status = status;
         this.setInterestRate(interestRate);
-        this.interestUpdateDate=interestUpdateDate;
     }
 
-    public Savings(Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner, String secretKey, Status status, LocalDate interestUpdateDate) {
+    public Savings(Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner, String secretKey, Status status){
         super(balance, primaryOwner, secondaryOwner);
         this.secretKey = secretKey;
         this.minimumBalance = new BigDecimal("1000.00");
         this.status = status;
         this.interestRate = new BigDecimal("0.0025");
-        this.interestUpdateDate=interestUpdateDate;
     }
 
 
