@@ -2,6 +2,7 @@ package com.ironhack.midtermproject.dao.accounts;
 
 import com.ironhack.midtermproject.dao.Money;
 import com.ironhack.midtermproject.dao.owners.AccountHolder;
+import com.ironhack.midtermproject.enums.AccountType;
 import com.ironhack.midtermproject.enums.Status;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,21 +26,18 @@ import java.util.Date;
 public class StudentChecking extends Account{
 
     @JoinColumn(unique = true)
-    private String secretKey;
     @Enumerated(EnumType.STRING)
     private Status status;
 
 
     public StudentChecking(Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner, String secretKey) {
-        super(balance, primaryOwner, secondaryOwner);
-        this.secretKey = secretKey;
+        super(balance, primaryOwner, secondaryOwner, AccountType.STUDENT_CHECKING,secretKey);
         this.status=Status.ACTIVE;
     }
 
     public StudentChecking(Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner, String secretKey,
      Status status) {
-        super(balance, primaryOwner, secondaryOwner);
-        this.secretKey = secretKey;
+        super(balance, primaryOwner, secondaryOwner,AccountType.STUDENT_CHECKING,secretKey);
         this.status=status;
     }
 }

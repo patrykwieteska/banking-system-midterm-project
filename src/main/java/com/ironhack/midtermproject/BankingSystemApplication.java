@@ -6,7 +6,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
 @EnableSwagger2
-public class BankingSystemApplication {
+public class  BankingSystemApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(BankingSystemApplication.class, args);

@@ -4,6 +4,7 @@ import com.ironhack.midtermproject.dao.Money;
 import com.ironhack.midtermproject.dao.accounts.CreditCard;
 import com.ironhack.midtermproject.dao.owners.AccountHolder;
 import com.ironhack.midtermproject.dto.CreditCardDto;
+import com.ironhack.midtermproject.exceptions.IncorrectCreditLimitValueException;
 import com.ironhack.midtermproject.repository.CreditCardRepository;
 import com.ironhack.midtermproject.service.AccountHolderService;
 import com.ironhack.midtermproject.service.CreditCardService;
@@ -22,6 +23,10 @@ public class CreditCartServiceImpl implements CreditCardService {
 
     @Override
     public void createCreditCard(CreditCardDto creditCardDto) {
+
+        if(creditCardDto.getCreditLimit()==null)
+            throw new IncorrectCreditLimitValueException("Credit limit cannot be null");
+
         CreditCard creditCard = new CreditCard(new Money(creditCardDto.getBalanceAmount()),
                 creditCardDto.getCreditLimit(),null,null);
 
@@ -36,10 +41,6 @@ public class CreditCartServiceImpl implements CreditCardService {
 
         if(creditCardDto.getInterestRate()!=null) {
             creditCard.setInterestRate(creditCardDto.getInterestRate());
-        }
-
-        if(creditCardDto.getCreditLimit()!=null) {
-            creditCard.setCreditLimit(creditCardDto.getCreditLimit());
         }
 
         creditCardRepository.save(creditCard);

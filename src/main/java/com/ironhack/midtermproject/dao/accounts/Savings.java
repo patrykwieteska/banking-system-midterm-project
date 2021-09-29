@@ -3,6 +3,7 @@ package com.ironhack.midtermproject.dao.accounts;
 import com.ironhack.midtermproject.common.Calculator;
 import com.ironhack.midtermproject.dao.Money;
 import com.ironhack.midtermproject.dao.owners.AccountHolder;
+import com.ironhack.midtermproject.enums.AccountType;
 import com.ironhack.midtermproject.enums.Status;
 import com.ironhack.midtermproject.exceptions.IncorrectInterestRateValueException;
 import com.ironhack.midtermproject.exceptions.IncorrectMinimumBalanceValueException;
@@ -26,9 +27,6 @@ import java.util.Date;
 @AllArgsConstructor
 public class Savings extends Account{
 
-    @JoinColumn(unique = true)
-    private String secretKey;
-
     @DecimalMin(value = "0.0",message = "Minimum balance cannot be less than 0")
     private BigDecimal minimumBalance;
 
@@ -41,8 +39,7 @@ public class Savings extends Account{
 
     public Savings(Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner, String secretKey,
                    BigDecimal minimumBalance, Status status, BigDecimal interestRate) {
-        super(balance, primaryOwner, secondaryOwner);
-        this.secretKey = secretKey;
+        super(balance, primaryOwner, secondaryOwner, AccountType.SAVINGS,secretKey);
         this.setMinimumBalance(minimumBalance);
         this.status = status;
         this.setInterestRate(interestRate);
@@ -50,8 +47,7 @@ public class Savings extends Account{
 
     public Savings(Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner, String secretKey,
                    BigDecimal minimumBalance, Status status) {
-        super(balance, primaryOwner, secondaryOwner);
-        this.secretKey = secretKey;
+        super(balance, primaryOwner, secondaryOwner, AccountType.SAVINGS,secretKey);
         this.setMinimumBalance(minimumBalance);
         this.status = status;
         this.interestRate = new BigDecimal("0.0025");
@@ -60,16 +56,14 @@ public class Savings extends Account{
 
     public Savings(Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner,
                    String secretKey, Status status, BigDecimal interestRate) {
-        super(balance, primaryOwner, secondaryOwner);
-        this.secretKey = secretKey;
+        super(balance, primaryOwner, secondaryOwner, AccountType.SAVINGS,secretKey);
         this.minimumBalance = new BigDecimal("1000.00");
         this.status = status;
         this.setInterestRate(interestRate);
     }
 
     public Savings(Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner, String secretKey, Status status){
-        super(balance, primaryOwner, secondaryOwner);
-        this.secretKey = secretKey;
+        super(balance, primaryOwner, secondaryOwner, AccountType.SAVINGS,secretKey);
         this.minimumBalance = new BigDecimal("1000.00");
         this.status = status;
         this.interestRate = new BigDecimal("0.0025");

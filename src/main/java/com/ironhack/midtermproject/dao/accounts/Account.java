@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.ironhack.midtermproject.dao.Money;
 import com.ironhack.midtermproject.dao.owners.AccountHolder;
+import com.ironhack.midtermproject.enums.AccountType;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,6 +19,7 @@ import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Digits;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -25,7 +27,6 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Inheritance(strategy=InheritanceType.JOINED)
-@DiscriminatorColumn(name="account_type", discriminatorType = DiscriminatorType.STRING)
 public abstract class Account {
 
     @Id
@@ -38,8 +39,6 @@ public abstract class Account {
     })
     private Money balance;
 
-
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "primary_owner_id")
     @NotNull
@@ -59,14 +58,26 @@ public abstract class Account {
     @DateTimeFormat(pattern = "yyyy-mm-dd")
     private LocalDate creationDate;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss.zzz")
+    private LocalDateTime lastModificationDate;
 
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private AccountType accountType;
 
-    public Account(Money balance, @NotNull AccountHolder primaryOwner, @Nullable AccountHolder secondaryOwner) {
+    @JoinColumn(unique = true)
+    private String secretKey;
+
+    public Account(Money balance, @NotNull AccountHolder primaryOwner, @Nullable AccountHolder secondaryOwner,
+                   AccountType accountType,String secretKey) {
         this.balance = balance;
         this.primaryOwner = primaryOwner;
         this.secondaryOwner = secondaryOwner;
         this.setPenaltyFee();
         this.creationDate=LocalDate.now();
+        this.accountType=accountType;
+        this.secretKey=secretKey;
+        this.lastModificationDate=LocalDateTime.now();
     }
 
     private void setPenaltyFee() {

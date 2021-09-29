@@ -26,10 +26,9 @@ public class AccountController {
     }
 
 
-//    @GetMapping("/{ownerId}")
-//    @ResponseStatus(HttpStatus.OK)
-//    public List<Account> getAccountByOwner(@PathVariable(name="ownerId") Long id) {
-//        return accountRepository.findByPrimaryOwnerId(id);
-//    }
-
+    @GetMapping("")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Account> getAccountByOwner() {
+        return accountRepository.findAll();
+    }
 }
