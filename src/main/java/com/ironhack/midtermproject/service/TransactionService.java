@@ -1,8 +1,8 @@
 package com.ironhack.midtermproject.service;
 
-import com.ironhack.midtermproject.dao.transactions.AccountTransactionRequest;
-import com.ironhack.midtermproject.dao.transactions.ThirdPartTransactionRequest;
-import com.ironhack.midtermproject.dao.transactions.TransactionConfirmation;
+import com.ironhack.midtermproject.dto.AccountTransactionRequest;
+import com.ironhack.midtermproject.dto.ThirdPartTransactionRequest;
+import com.ironhack.midtermproject.dto.TransactionConfirmation;
 
 public interface TransactionService {
     TransactionConfirmation createThirdPartTransaction(ThirdPartTransactionRequest transactionRequest, String hashedKey);
